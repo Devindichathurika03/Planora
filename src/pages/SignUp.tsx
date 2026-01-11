@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -126,9 +128,11 @@ export default function SignUpPage() {
 
           <p className="mt-4 text-center text-gray-600">
             Already have an account?{" "}
-            <a href="/signin" className="text-blue-600 font-medium">
+            <Link to="/signin">
+            <a  className="text-blue-600 font-medium">
               Sign In
             </a>
+            </Link>
           </p>
         </div>
       </div>
