@@ -1,74 +1,121 @@
-# React + TypeScript + Vite
+# Planora - Event Planning Platform (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Planora Logo](./src/assets/logo.png)
 
-Currently, two official plugins are available:
+**Planora** is a modern, frontend-only event planning platform that lets users explore vendors, plan events, and add services to a cart—all from a smooth and interactive interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Project Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Build interactive pages for **event planning**, **vendor marketplace**, **cart management**, **sign in**, and **sign up**.  
+- Users can browse vendors by category, see ratings, reviews, pricing, and select vendors for their events.  
+- Real-time cart updates and budget tracking.  
+- Mobile-friendly, responsive design using **Tailwind CSS**.  
+- Deployed frontend using **Vite** and **React** on **Vercel**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📅 Project Status
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Started:** Dec 2025  
+- **Frontend development:** Dec 2025 – Jan 2026  
+- Backend not included (frontend-only prototype).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠 Tech Stack
+
+- **Frontend:** React, TypeScript, Vite  
+- **Styling:** Tailwind CSS  
+- **Icons & UI components:** Lucide React, Shadcn/UI  
+- **State management:** React `useState` & Context API (for cart & planning data)  
+- **Deployment:** Vercel  
+
+---
+
+## 📂 Folder Structure
+```
+planora-frontend/
+├─ public/
+│ └─ index.html
+├─ src/
+│ ├─ assets/ # Images, logo
+│ ├─ components/ # UI components
+│ ├─ pages/ # Pages: Home, SignIn, SignUp, VendorDetails
+│ ├─ context/ # Context API for cart and plan data
+│ ├─ data/ # Mock vendor data
+│ ├─ App.tsx
+│ └─ main.tsx
+├─ tailwind.config.js
+├─ vite.config.ts
+└─ package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📌 Pages & Features
+
+- **Home Page:** Hero, vendor categories, featured vendors.  
+- **Sign Up / Sign In Pages:** Responsive forms with validation.  
+- **Vendor Details:** Detailed info, select date, add notes, add to cart.  
+- **Cart Sidebar:** Displays selected vendors, prices, and total budget.  
+- **Event Planning:** Multi-step event planning interface (frontend-only).  
+
+---
+
+## ⚡ Deployment on Vercel
+
+1. Make sure `vercel.json` is added to root:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
 ```
-"# Planora" 
+Push project to GitHub.
+
+Connect GitHub repo to Vercel.
+
+Deploy – frontend routing works without 404 errors.
+
+``` 
+Live demo: https://planorafrontend.vercel.app
+```
+
+📖 Usage
+Clone the repo:
+
+```
+Copy code
+git clone https://github.com/<your-username>/planora-frontend.git
+cd planora-frontend
+npm install
+npm run dev
+Open http://localhost:5173 in your browser.
+```
+⚙ Next Steps
+Connect to a backend API for persistent data.
+
+Add user authentication & database integration.
+
+Enable real checkout/payment flow.
+
+Improve vendor filtering, search, and recommendations.
+
+📝 Notes
+This project is currently frontend-only. All vendor and event data are mocked.
+
+Sign up/sign in pages are functional for UI demonstration but do not connect to a backend yet.
+
+💡 Author
+Name: R.G.D.Chathurika
+
+LinkedIn / Portfolio: www.linkedin.com/in/devindi-chathurika
+
+
+
+
