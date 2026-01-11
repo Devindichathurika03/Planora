@@ -90,13 +90,13 @@ function Footer (){
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 shrink-0" />
-                <a href="tel:+15551234567" className="hover:text-purple-400 transition-colors">
-                  +1 (555) 123-4567
+                <a href="tel:+94769878766" className="hover:text-purple-400 transition-colors">
+                  +94769878766
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>123 Event Street, New York, NY 10001</span>
+                <span>123 velon Street, Colombo, Sri Lanka</span>
               </li>
             </ul>
           </div>

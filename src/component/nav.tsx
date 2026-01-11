@@ -1,13 +1,14 @@
-import { ShoppingCart, User } from "lucide-react"
+import { User } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import LOGO from "../assets/logo.png"
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const cart = [] // replace with context or state if needed
+  const navigate = useNavigate();
+ 
 
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/planning", label: "Plan Event" },
     { path: "/marketplace", label: "Vendors" },
     { path: "/stories", label: "Success Stories" },
     { path: "/vendor-portal", label: "For Vendors" },
@@ -40,20 +41,14 @@ function Navbar() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-4">
-          <NavLink to="/cart" className="relative">
-            <ShoppingCart className="w-5 h-5" />
-            {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center">
-                {cart.length}
-              </span>
-            )}
-          </NavLink>
-
-          <button>
-            <User className="w-5 h-5" />
-          </button>
-        </div>
+            <div className="flex items-center gap-4">
+      <button
+        onClick={() => navigate("/signin")}
+        className="p-2 rounded-full hover:bg-purple-100 transition"
+      >
+        <User className="w-7 h-7 text-blue-700" />
+      </button>
+    </div>
       </div>
     </header>
   )

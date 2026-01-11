@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Star, MapPin } from "lucide-react";
 
-
 const mockVendors = [
   // Venues
   {
@@ -215,28 +214,127 @@ const mockVendors = [
 
 
 
- function VendorMarketplace() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | string>("all");
-  const [searchQuery, setSearchQuery] = useState("");
+// Dummy UI components
+const Input = (props: any) => <input className="border rounded px-3 py-2 w-full" {...props} />;
+const Button = ({ children, className = "", ...props }: any) => <button className={`px-4 py-2 rounded-md ${className}`} {...props}>{children}</button>;
+const Select = (props: any) => <select className="border rounded px-3 py-2 w-full" {...props} />;
 
-  const filteredVendors = mockVendors.filter((vendor) => {
-    const matchesCategory = selectedCategory === "all" || vendor.category === selectedCategory;
-    const matchesSearch =
-      vendor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      vendor.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+// Main Page Component
+export default function PlanEventPage() {
+  // Event form state
+  const [eventType, setEventType] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [guestCount, setGuestCount] = useState(0);
+  const [budget, setBudget] = useState(0);
+  const [theme, setTheme] = useState("");
+  const [SpecialNote, setSpecialNote] = useState("");
+
+  // Vendor marketplace state
+  const [cart, setCart] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredVendors = mockVendors.filter(v => 
+    (selectedCategory === "all" || v.category === selectedCategory) &&
+    (v.name.toLowerCase().includes(searchQuery.toLowerCase()) || v.description.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  const addToCart = (vendor: any) => {
+    if (!cart.find(v => v.id === vendor.id)) {
+      setCart([...cart, vendor]);
+    }
+  };
+
+  const removeFromCart = (vendorId: string) => {
+    setCart(cart.filter(v => v.id !== vendorId));
+  };
+
+  const totalCost = cart.reduce((sum, v) => sum + v.price, 0) + budget;
+
+  const handleSubmit = () => {
+    const plan = {
+      eventType, eventDate, guestCount, budget, theme, vendors: cart
+    };
+    console.log("Submitting plan:", plan);
+    alert("Plan submitted! Check console for details.");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
-        {/* Header */}
+       {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-4xl mb-4">Vendor Marketplace</h1>
           <p className="text-gray-600">
-            Browse our curated collection of verified vendors
+            Browse our curated collection of verified vendors <br/> (Sign in required to submit your plan)
           </p>
         </div>
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
+        {/* Event Form */}
+        <div className="flex-1 bg-white p-6 rounded-lg shadow">
+          <h2 className="text-2xl font-semibold mb-4">Plan Your Event</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block mb-1 font-medium">Event Type</label>
+              <Select value={eventType} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setEventType(e.target.value)}>
+                <option value="">Select Event Type</option>
+                <option value="venue">Wedding</option>
+                <option value="caterer">Birthday</option>
+                <option value="decorator">Corporate</option>
+              </Select>
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Event Date</label>
+              <Input type="date" value={eventDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEventDate(e.target.value)} />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Guest Count</label>
+              <Input type="number" min={1} value={guestCount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGuestCount(parseInt(e.target.value) || 0)} />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Budget (LKR)</label>
+              <Input type="number" min={0} value={budget} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget(parseInt(e.target.value) || 0)} />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Theme</label>
+              <Select value={theme} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTheme(e.target.value)}>
+                <option value="">Select Theme</option>
+                <option value="luxury">Luxury</option>
+                <option value="minimal">Minimal</option>
+                <option value="festive">Festive</option>
+                <option value="traditional">Traditional</option>
+              </Select>
+            </div>
+             <div>
+              <label className="block mb-1 font-medium">Special Note</label>
+              <Input type="text" placeholder="Any special requirements for the vendor, or a simple idea about your event you’d like to share"  min={0} value={SpecialNote} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSpecialNote(e.target.value)} />
+            </div>
+          </div>
+        </div>
+
+        {/* Cart */}
+        <div className="w-full lg:w-80 bg-white p-6 rounded-lg shadow flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold mb-4">Cart</h2>
+          <div className="flex-1 space-y-2 overflow-y-auto max-h-100">
+            {cart.length === 0 && <p className="text-gray-500">No vendors added</p>}
+            {cart.map(vendor => (
+              <div key={vendor.id} className="flex justify-between items-center bg-gray-100 p-2 rounded">
+                <div>
+                  <p className="font-medium">{vendor.name}</p>
+                  <p className="text-sm text-gray-600">{vendor.priceUnit} {vendor.price.toLocaleString()}</p>
+                </div>
+                <button className="text-red-600 font-semibold" onClick={() => removeFromCart(vendor.id)}>Remove</button>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+            <p className="font-semibold text-lg">Total: LKR {totalCost.toLocaleString()}</p>
+            <Button className="w-full bg-blue-600 text-white mt-2 hover:bg-blue-700" onClick={handleSubmit}>Submit Plan</Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Vendor Marketplace */}
+      <div className="container mx-auto px-4 py-5">
 
         {/* Filters */}
         <div className="mb-6 flex flex-col md:flex-row gap-4 items-center">
@@ -296,17 +394,18 @@ const mockVendors = [
                   <MapPin className="w-4 h-4 mr-1" />
                   {vendor.location}
                 </div>
-                <div className="text-lg font-semibold text-purple-600">
+                <div className="text-lg font-semibold text-blue-600">
                  {vendor.priceUnit} {vendor.price.toLocaleString()} 
                 </div>
-               <div className="flex gap-2 mt-3">
-  <button className="flex-1 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
-    View Details
-  </button>
-  <button className="flex-1 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
+            
+  
+  <button
+    className="flex-1 py-2 w-full  bg-blue-600 text-white rounded-md hover:bg-blue-700"
+    onClick={() => addToCart(vendor)}
+  >
     Add Cart
   </button>
-</div>
+
               </div>
             </div>
           ))}
@@ -318,8 +417,7 @@ const mockVendors = [
           </div>
         )}
       </div>
+
     </div>
   );
-};
-
-export default VendorMarketplace
+}

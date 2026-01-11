@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Calendar, DollarSign, Sparkles, CheckCircle,Heart,ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 
 
@@ -176,15 +177,13 @@ const customerStories = [
               and book everything in one place
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
+              <Link to="/marketplace">
               <button
-                
                 className="border border-white hover:bg-transparent text-gray-800 bg-gray-100 rounded-md py-2 px-5">
                 Start Planning
               </button>
-              <button
-                className="border border-white hover:bg-transparent text-gray-800 bg-gray-100 rounded-md py-2 px-5">
-                Browse Vendors
-              </button>
+              </Link>
+             
             </div>
           </div>
         </div>
@@ -340,11 +339,13 @@ const customerStories = [
             <p className="text-xl mb-8 opacity-90">
               Join thousands of happy customers who brought their events to life with Planora
             </p>
+             <Link to="/marketplace">
             <button
               className="bg-white text-gray-600 hover:bg-gray-100 rounded-md py-2 px-4 "
             >
               Get Started Now
             </button>
+          </Link>
           </div>
         </div>
       </section>

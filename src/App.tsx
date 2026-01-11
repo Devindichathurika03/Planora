@@ -9,7 +9,9 @@ import Home from "./pages/Home";
 import SuccessStories from "./pages/SuccessStories";
 import Vendors from "./pages/Vendors";
 import Forvendor from "./pages/Foevendors";
-import  Plan  from "./pages/Plan";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
         <Route path="/stories" element={<SuccessStories />} />
         <Route path="/marketplace" element={<Vendors />} />
         <Route path="/vendor-portal" element={<Forvendor />} />
-        <Route path="/planning" element={<Plan />} />
-        
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+       
       </Routes>
 
       <Footer />
