@@ -128,11 +128,10 @@ export default function SignUpPage() {
 
           <p className="mt-4 text-center text-gray-600">
             Already have an account?{" "}
-            <Link to="/signin">
-            <a  className="text-blue-600 font-medium">
-              Sign In
-            </a>
-            </Link>
+            <Link to="/signin" className="text-blue-600 font-medium">
+         Sign In
+        </Link>
+
           </p>
         </div>
       </div>

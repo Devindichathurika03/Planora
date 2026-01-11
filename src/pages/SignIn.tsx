@@ -71,10 +71,8 @@ export default function SignInPage() {
 
         <p className="mt-4 text-center text-gray-600">
           Don&apos;t have an account?{" "}
-          <Link to="/signup">
-          <a  className="text-blue-600 font-medium">
-            Sign Up
-          </a>
+          <Link to="/signup" className="text-blue-600 font-medium">
+             Sign Up
           </Link>
         </p>
       </div>
